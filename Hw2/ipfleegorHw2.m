@@ -68,7 +68,28 @@ disp('====== Problem 5 ======') ;
 % Problem 6
 disp(' ') ;  % to get a new line
 disp('====== Problem 6 ======') ;
-% define the vector
+
+%load thermo_scores.dat
+load thermo_scores.dat -ascii
+student5 = thermo_scores(5,:);
+test1 = thermo_scores(:,2)'
+test2 = thermo_scores(:,3)';
+test3 = thermo_scores(:,4)';
+
+disp('test1 std_dev and var');
+std(test1)
+var(test1)
+disp('test2 std_dev and var');
+std(test2)
+var(test2)
+disp('test3 std_dev and var');
+std(test3)
+var(test3)
+
+
+
+
+
 
 % display the vector for each format
 disp('format short:') ;
