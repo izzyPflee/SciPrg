@@ -72,9 +72,18 @@ disp('====== Problem 6 ======') ;
 %load thermo_scores.dat
 load thermo_scores.dat -ascii
 student5 = thermo_scores(5,:);
-test1 = thermo_scores(:,2)'
+students = thermo_scores(:,1);
+test1 = thermo_scores(:,2)';
 test2 = thermo_scores(:,3)';
 test3 = thermo_scores(:,4)';
+
+final_scores = (test1+test2+test3)/300 * 100;
+scores_table = table(students, test1', test2', test3', final_scores',...
+    'VariableNames',{'StudentID' 'Test1' 'Test2' 'Test3' 'FinalScore'})
+
+%In case the table should be sorted by scores instead of student ids
+% scores_table_score_sorted = sortrows(scores_table,5)
+
 
 disp('test1 std_dev and var');
 std(test1)
