@@ -21,9 +21,12 @@ disp('====== Problem 1 ======') ;
 
 %Create saw180 function as specified by assignment directions
 saw180=@(x)x-(x>180)*360;
-% 
 long = [160 -160 -10 10];
 offset = [30 -30 30 -30];
+% Test on long+offset set
+disp('inputs:');
+disp(long+offset);
+disp('output results:');
 saw180(mod(long+offset, 360))
 
 % Problem 2
