@@ -13,20 +13,18 @@ disp('Isaac Pfleegor- CSCD 409 Homework 2') ;
 % change to Octave to Matlab if that's what you use
 disp('This assignment was tested in Matlab') ;   
 
-%Create saw180 function as specified by assignment directions
-saw180=@(x)x-(x>180)*360;
+
 
 % Problem 1
 disp(' ') ;  % to get a new line
 disp('====== Problem 1 ======') ;
-disp('Isvarname Tests for legitimate variable names:')
-disp('fred')
-isvarname fred
-% more isvarname testing goes here
 
-disp('which testing:')
-% do some which tests too
-% test reassignment of tan
+%Create saw180 function as specified by assignment directions
+saw180=@(x)x-(x>180)*360;
+% 
+long = [160 -160 -10 10];
+offset = [30 -30 30 -30];
+saw180(mod(long+offset, 360))
 
 % Problem 2
 disp(' ') ;  % to get a new line
@@ -43,6 +41,7 @@ disp(' ') ;  % to get a new line
 disp('====== Problem 3 ======') ;
 max_h = tand(33)*120
 min_h = tand(27)*120
+
 % Problem 4
 disp(' ') ;  % to get a new line
 disp('====== Problem 4 ======') ;
@@ -55,15 +54,19 @@ histogram_fig = histogram(G);
 % grades are in the 60-80's bin. There are outliers that 
 % affect that skew the average, so I would say that the median 
 % represents the most typical grade.
-G_count = nemel(G)
+G_count = numel(G)
 G_sorted = sort(G)
 %standard deviation
 standard_dev = std(G)
 
-
 % Problem 5
 disp(' ') ;  % to get a new line
 disp('====== Problem 5 ======') ;
+
+dev = 2;
+mean = 70;
+data_set = dev.*randn(1,121) + mean;
+plot(data_set)
 
 % Problem 6
 disp(' ') ;  % to get a new line
