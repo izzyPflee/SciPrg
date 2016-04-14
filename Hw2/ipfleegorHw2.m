@@ -49,15 +49,17 @@ min_h = tand(27)*120
 disp(' ') ;  % to get a new line
 disp('====== Problem 4 ======') ;
 G = [68, 83, 61, 70, 75, 82, 57, 5, 76, 85, 62, 71, 96, 78, 76, 68, 72, 75, 83, 93];
-mean = mean(G)
+mean_val = mean(G)
 median = median(G)
+figure();
 histogram_fig = histogram(G);
+title('problem 4 grade distribution');
 %The  median more accurately represents the typical grade. 
 % When looking at the histogram, we can see that most of the 
 % grades are in the 60-80's bin. There are outliers that 
 % affect that skew the average, so I would say that the median 
 % represents the most typical grade.
-G_count = numel(G)
+grade_count = numel(G)
 G_sorted = sort(G)
 %standard deviation
 standard_dev = std(G)
@@ -69,7 +71,14 @@ disp('====== Problem 5 ======') ;
 dev = 2;
 mean = 70;
 data_set = dev.*randn(1,121) + mean;
+figure()
 plot(data_set)
+title('Problem 5 data');
+%get min val and it's minute index
+[min_val,min_minute] = min(data_set)
+%get max val and it's minute index
+[max_val,max_minute] = max(data_set)
+
 
 % Problem 6
 disp(' ') ;  % to get a new line
@@ -83,14 +92,6 @@ test1 = thermo_scores(:,2)';
 test2 = thermo_scores(:,3)';
 test3 = thermo_scores(:,4)';
 
-final_scores = (test1+test2+test3)/300 * 100;
-scores_table = table(students, test1', test2', test3', final_scores',...
-    'VariableNames',{'StudentID' 'Test1' 'Test2' 'Test3' 'FinalScore'})
-
-%In case the table should be sorted by scores instead of student ids
-% scores_table_score_sorted = sortrows(scores_table,5)
-
-
 disp('test1 std_dev and var');
 std(test1)
 var(test1)
@@ -100,6 +101,15 @@ var(test2)
 disp('test3 std_dev and var');
 std(test3)
 var(test3)
+
+final_scores = (test1+test2+test3)/300 * 100;
+scores_table = table(students, test1', test2', test3', final_scores',...
+    'VariableNames',{'StudentID' 'Test1' 'Test2' 'Test3' 'FinalScore'})
+
+%In case the table should be sorted by scores instead of student ids
+% scores_table_score_sorted = sortrows(scores_table,5)
+
+
 
 
 
@@ -123,6 +133,9 @@ Ans = T./P
 % Problem 8
 disp(' ') ;  % to get a new line
 disp('====== Problem 8 ======') ;
+
+%we can see that the values are the same for each operation, so
+%the operations are equivalent
 A = [1 3 5];
 B = [-3 -2 4];
 disp('dot(A,B)')
