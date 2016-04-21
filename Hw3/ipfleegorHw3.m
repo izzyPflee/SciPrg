@@ -22,13 +22,12 @@ disp('================Problem 1 ==============');
 i = 0;
 x1 = 1
 x2 = 2
-while(i < 20)
+for i = 1:10
     x1 = 19 - 3*x2
     x2 = 25 - 3*x1
-    i = i + 1;
-    %we could print the diff between the old and new
-    %vals to show difference over time
 end  
+
+disp('obsevre that the values never converge into constant values');
 
 
 disp('');
@@ -47,11 +46,11 @@ m1 =[34.7177;70.9241;82.9271;-26.2222];
 m2 = m1(1:3,:);
 
 % original m solution
-res1 = A2\m2
+x_orig = A2\m2
 m2_rounded = round(m2,1);
 
 % rounded m solution
-res2 = A2\m2_rounded
+x_rounded = A2\m2_rounded
 
 
 disp('');
@@ -74,7 +73,7 @@ m_orig = A_inv * m1
 disp('using Svd pseudo-inverse');
 disp('rounded m');
 m1_rounded = round(m1,1)
-m_rounded = A_inv*m1_rounded
+x_rounded = A_inv*m1_rounded
 
 
 disp('');
@@ -89,9 +88,9 @@ disp('');
 % pinv(), (iii) a solution obtained
 %  using the backslash operator.
 
-disp('using least-sqaures');
+disp('using least-squares');
 % check this answer
-x = A1'*m1
+x = inv(A1'*A1)*A1'*m1
 
 disp('using pinv()');
 x = pinv(A1)*m1
@@ -99,6 +98,11 @@ x = pinv(A1)*m1
 disp('using left division');
 
 x = A1\m1
+
+disp('');
+disp('================Problem 5 ==============');
+
+disp('see pdf printout for hw5 solution');
 
 disp('');
 disp('================Problem 6 ==============');
@@ -139,9 +143,9 @@ end
 
 %create 8 x 1 X vector using min indices
 new_x = zeros(8,1);
-new_x(min_i, 1) = min_x(1)
-new_x(min_j, 1) = min_x(2)
-new_x(min_k, 1) = min_x(3)
+new_x(min_i, 1) = min_x(1);
+new_x(min_j, 1) = min_x(2);
+new_x(min_k, 1) = min_x(3);
 
 %test output
 disp('M*new_x');
