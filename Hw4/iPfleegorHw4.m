@@ -146,5 +146,13 @@ figure
 hold on
 plot(x_1(1,:), x_1(2,:),'o');
 plot(x_2(1,:), x_2(2,:),'o');
+
+%Part C
+
+x_t2 = x_t.^2;
+y_t2 = y_t.^2;
+figure
+plot(x_t2, y_t2, '.');
+
 % turn off diary logging
 diary off
