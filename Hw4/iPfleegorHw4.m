@@ -30,11 +30,12 @@ disp('================Problem 1 ==============');
 	
 	M_1 = M'*stretcher_M;
 	
-	plot(M_1(:,1),M_1(:,2))
+% 	plot(M_1(:,1),M_1(:,2))
 	
 hanger_M = [[1/sqrt(2);1/sqrt(2)], [1/sqrt(2);-1/sqrt(2)]];
 M_2 = M_1*(hanger_M);
 
+figure
 plot(M_2(:,1),M_2(:,2))
 
 
@@ -66,7 +67,7 @@ projeted_point = [p_u(1,1);p_u(2,1)]
 q_vec = [origin,projeted_point];
 
 %plot the original vector to the projected point
-
+figure
 plot(q_vec);
 hold on
 % plot projected point
@@ -92,7 +93,7 @@ t = linspace(0,2*pi,1000);
 
 y_t = cos(t).*r';
 x_t = sin(t).*r';
-figure
+
 % plot(x_t,y_t,'.')
 
 M = [x_t;y_t];
