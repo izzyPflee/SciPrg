@@ -54,21 +54,18 @@ p_v = V*p
 %part b (stretcher matrix to extract x value)
 S = [ 1, 0; 0, 0];
 p_s = S*p_v
+
 %part c(rotate the point back)
-p_u = V'*p_s
-
 %"hang" the point back using the U matrix "R'"
+p_u = V'*p_s
 %part d (plot original point and projected point)
-
-
-origin = [0;0]
-projeted_point = [p_u(1,1);p_u(2,1)]
-
-q_vec = [origin,projeted_point];
+x_vals = [0, p_u(1,1)];
+y_vals = [0, p_u(2,1)];
 
 %plot the original vector to the projected point
 figure
-plot(q_vec);
+% plot(q_vec);
+plot(x_vals, y_vals);
 hold on
 % plot projected point
 plot(p_u(1,1),p_u(2,1),'o');
