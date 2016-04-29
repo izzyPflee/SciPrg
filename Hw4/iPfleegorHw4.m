@@ -44,6 +44,31 @@ plot(M_2(:,1),M_2(:,2))
 disp('');
 disp('================Problem 2 ==============');
 
+q = [ 0.5; 0.866];
+p = [ 2; 1];
+R = [ cosd(60), sind(60); -sind(60), cosd(60)];
+
+% part a (rotate point)
+q_rotate = R*q
+p_rotate = R*p
+%part b (stretcher matrix to extract x value)
+S = [ 1, 0; 0, 0];
+s_rot_trans = S*p_rotate
+%part c(rotate the point back)
+s_rot_trans_back = R'*s_rot_trans
+%part d (plot original point and projected point)
+
+%problem 3
+disp('');
+disp('================Problem 3 ==============');
+r = 0.5 +(1.5 -0.5).*rand(1000,1);
+t = linspace(0,2*pi,1000);
+
+y_t = cos(t).*r';
+x_t = sin(t).*r';
+plot(x_t,y_t,'.')
+
+M = [x_t;y_t];
 
 % turn off diary logging
 diary off
