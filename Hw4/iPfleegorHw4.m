@@ -161,38 +161,63 @@ disp('================Problem 4 ==============');
 % i) a = 0.94754, b = 0.39249: these values minimize the RMS error
 % ii) a = 0.96043, b = 0.39782: these values ensure that the max and min errors are balanced around 0.
 
-figure
+
 angles = 0:360/1200:360
 R = cos(angles);
 I = sin(angles);
 
 circle_M = [R,I];
-hold on
+figure
 polar(angles,ones(1,1201))
+hold on
 
+%coefficients
 rms_a = 0.94754;
 rms_b = 0.39249;
+min_max_error_a = 0.96043;
+min_max_error_b = 0.39782;
+
+%vectors to hold value * coefficents
 rms_R = zeros(1,1201);
 rms_I = zeros(1,1201);
+min_max_error_R = zeros(1,1201);
+min_max_error_I = zeros(1,1201);
 
-for( i = 1:1201)
-    temp_r = abs(R(1,i))
-    temp_i = abs(I(1,i))
+
+%cycle through all values of R and I
+for i = 1:1201
+    %for storing temp values
+    temp_r = abs(R(1,i));
+    temp_i = abs(I(1,i));
+    %conditional for multiplying coefficents
     if(temp_r >= temp_i)
         rms_R(1,i) = temp_r*rms_a;
+        min_max_error_R(1,i) = temp_r*min_max_error_a;
+        
         rms_I(1,i) = temp_i*rms_b;
+        min_max_error_I(1,i) = temp_i*min_max_error_b;
     else
         rms_R(1,i) = temp_r*rms_b;
+        min_max_error_R(1,i) = temp_r*min_max_error_b;
+        
         rms_I(1,i) = temp_i*rms_a;
+        min_max_error_I(1,i) = temp_i*min_max_error_a;
     end
 end
 
-rms_error = rms_R +rms_I;
+%add vectors
+rms_error_mag = rms_R +rms_I;
+min_max_error_mag = min_max_error_R + min_max_error_I;
+%plot results
+polar(angles, rms_error_mag )
+polar(angles, min_max_error_mag)
 
-polar(angles, rms_error)
-        
+
+
+
+
    
-
+legend('unit circle', 'min RMS error', 'min = max error');
 
 
 % turn off diary logging
