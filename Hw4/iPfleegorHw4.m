@@ -29,14 +29,16 @@ disp('================Problem 1 ==============');
     stretcher_M = [ [1.2, 0]', [0,0.5]'];
 	
 	M_1 = M'*stretcher_M;
-	
-% 	plot(M_1(:,1),M_1(:,2))
+	figure
+	plot(M_1(:,1),M_1(:,2))
+    title('p1: unit circle')
 	
 hanger_M = [[1/sqrt(2);1/sqrt(2)], [1/sqrt(2);-1/sqrt(2)]];
 M_2 = M_1*(hanger_M);
 
 figure
 plot(M_2(:,1),M_2(:,2))
+title('p1: final plot');
 
 
 %problem 2
@@ -49,14 +51,17 @@ p = [ 2; 1];
 V = [ cosd(60), sind(60); -sind(60), cosd(60)];
 
 % part a (rotate point)
+disp('problem 2, part a answer:');
 q_rotate = V*q;
 p_v = V*p
 %part b (stretcher matrix to extract x value)
 S = [ 1, 0; 0, 0];
+disp('problem 2, part b answer: ');
 p_s = S*p_v
 
 %part c(rotate the point back)
 %"hang" the point back using the U matrix "R'"
+disp('problem 2, part c answer:');
 p_u = V'*p_s
 %part d (plot original point and projected point)
 x_vals = [0, p_u(1,1)];
@@ -73,8 +78,10 @@ plot(p_u(1,1),p_u(2,1),'o');
 %plot original point
 plot(p(1,1),p(2,1),'ro');
 
+title('problem 2 plot');
 
 %part e
+disp('problem 2, part e answer: ');
 disp('point projection using vector project matrix derived from q');
 x_1 = q*q'*p
 disp('point projection using svd')
@@ -119,6 +126,8 @@ b_plot = [0,0;b];
 hold on 
 axis equal
 plot(a_plot, b_plot);
+
+title('problem 3, part a plot');
 %get pricipcal component vectors
 %  [U,S,V] = svd(M);
 %principal components in U
@@ -143,14 +152,14 @@ figure
 hold on
 plot(x_1(1,:), x_1(2,:),'o');
 plot(x_2(1,:), x_2(2,:),'o');
-
+title('problem 3, part b plot');
 %Part C
 
 x_t2 = x_t.^2;
 y_t2 = y_t.^2;
 figure
 plot(x_t2, y_t2, '.');
-
+title('problem 3, part c plot');
 %problem 4
 disp('');
 disp('================Problem 4 ==============');
@@ -162,7 +171,7 @@ disp('================Problem 4 ==============');
 % ii) a = 0.96043, b = 0.39782: these values ensure that the max and min errors are balanced around 0.
 
 
-angles = 0:360/1200:360
+angles = 0:360/1200:360;
 R = cos(angles);
 I = sin(angles);
 
@@ -212,7 +221,7 @@ min_max_error_mag = min_max_error_R + min_max_error_I;
 polar(angles, rms_error_mag )
 polar(angles, min_max_error_mag)
 
-
+title('problem 4: polar plot');
 
 
 
