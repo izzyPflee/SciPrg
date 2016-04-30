@@ -151,5 +151,49 @@ y_t2 = y_t.^2;
 figure
 plot(x_t2, y_t2, '.');
 
+%problem 4
+disp('');
+disp('================Problem 4 ==============');
+
+% Start by generating 1024 samples for R and I around the unit circle.
+% Then approximate the unit magnitude
+% using the linear approximation with the following coefficients:
+% i) a = 0.94754, b = 0.39249: these values minimize the RMS error
+% ii) a = 0.96043, b = 0.39782: these values ensure that the max and min errors are balanced around 0.
+
+figure
+angles = 0:360/1200:360
+R = cos(angles);
+I = sin(angles);
+
+circle_M = [R,I];
+hold on
+polar(angles,ones(1,1201))
+
+rms_a = 0.94754;
+rms_b = 0.39249;
+rms_R = zeros(1,1201);
+rms_I = zeros(1,1201);
+
+for( i = 1:1201)
+    temp_r = abs(R(1,i))
+    temp_i = abs(I(1,i))
+    if(temp_r >= temp_i)
+        rms_R(1,i) = temp_r*rms_a;
+        rms_I(1,i) = temp_i*rms_b;
+    else
+        rms_R(1,i) = temp_r*rms_b;
+        rms_I(1,i) = temp_i*rms_a;
+    end
+end
+
+rms_error = rms_R +rms_I;
+
+polar(angles, rms_error)
+        
+   
+
+
+
 % turn off diary logging
 diary off
