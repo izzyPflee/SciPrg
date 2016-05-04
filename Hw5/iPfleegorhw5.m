@@ -54,5 +54,45 @@ zlabel('z');
 disp('');
 disp('================Problem 2 ==============');
 
+load lake_powell.dat
+
+%sum each year and put into a column vector
+[num_months,num_years] = size(lake_powell)
+year_sums = lake_powell'*ones(num_months,1)
+year_avgs = year_sums / num_months
+total_sum = year_sums' * ones(num_years,1)
+total_avg = total_sum / num_years
+
+%problem 4
+
+base = 2000;
+mo_contrib = 175;
+mo_interest = 0.0041;
+%12 months * 18years
+total_months = 12 * 18;
+
+balance_ledger = zeros(1,total_months);
+
+balance_ledger(1,1) = base + (base + mo_contrib)*mo_interest + mo_contrib;
+
+% 
+% New balance = Old balance + interest + your contribution
+for i = 2:total_months
+    %get the old balance from ledger
+    old_balance = balance_ledger(1, i-1);
+    %add interest and new contribution to old_balance
+    new_balance = old_balance + old_balance*mo_interest + mo_contrib;
+    balance_ledger(1,i) = new_balance;
+end
+
+count = 1:total_months;
+figure
+plot(count,balance_ledger);
+xlabel('months');
+ylabel('balance');
+% Find the amount in the savings account each month for the next 18 years (create a vector of the
+% values). A for loop is fine here. Plot the amount in the account as a function of elapsed time in
+% months.
+
 %end of file
 diary off
