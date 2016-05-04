@@ -84,9 +84,9 @@ disp('==================Problem 3================');
 val1 = input('enter the first value of a fibonacci sequence: ');
 val2 = input('enter the second value of a fibonacci sequence: ');
 
-[a,b] = ihpFibRatio(val1,val2);
+ratio = ihpFibRatio(val1,val2);
 
-fprintf('values whose ratio is approximately the golden ratio: %d/%d = %d\n', a,b,(a/b));
+fprintf('ratio returned: %d\n', ratio);
 
 %problem 4
 disp('');
