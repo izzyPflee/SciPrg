@@ -86,7 +86,7 @@ val2 = input('enter the second value of a fibonacci sequence: ');
 
 [a,b] = ihpFibRatio(val1,val2);
 
-fprintf('values whose ratio is approximately the golden ratio: %d, %d\n', a,b);
+fprintf('values whose ratio is approximately the golden ratio: %d/%d = %d\n', a,b,(a/b));
 
 %problem 4
 disp('');
@@ -116,7 +116,9 @@ figure
 plot(count,balance_ledger);
 xlabel('months');
 ylabel('balance');
-cummulative_savings = balance_ledger(1,end)
+cummulative_savings = balance_ledger(1,end);
+
+fprintf('total savings accumulated: %d\n', cummulative_savings);
 % Find the amount in the savings account each month for the next 18 years (create a vector of the
 % values). A for loop is fine here. Plot the amount in the account as a function of elapsed time in
 % months.
