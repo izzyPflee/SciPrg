@@ -1,5 +1,6 @@
 function [a,b] = ihpFibRatio(val1,val2)
-%returns the ratio b/a that converges within .001
+%returns the ratio a/b that converges within .001
+%and whose ratio returns approx golden ratio 1.618
 
 v1 = val1;
 v2 = val2;
@@ -17,8 +18,6 @@ v2 = temp_v2;
 prev_ratio = cur_ratio;
 
 cur_ratio = v2/v1;
-
-disp(cur_ratio - prev_ratio);
 
 end
 
