@@ -57,12 +57,13 @@ load lake_powell.dat;
 %sum each column
 year_sums = sum(lake_powell(:,:));
 
+disp('part a');
 year_averages = (year_sums / 12)
 
 %for total average sum all years and divide by total number of months
 total_average = sum(year_sums)/(12*8)
 
-%part b
+disp('part b');
 higher_than_average_months = find(year_averages>=total_average);
 
 total_higher_months = max(higher_than_average_months);
@@ -73,12 +74,19 @@ years = 2000:2007;
 %parse years and averages using index
 years_above_average = years(higher_than_average_months)';
 averages_above_average = year_averages(higher_than_average_months)';
-%part c
+disp('part c');
 table(years_above_average, averages_above_average)
 
 %problem 2
 disp('');
 disp('==================Problem 3================');
+
+val1 = input('enter the first value of a fibonacci sequence: ');
+val2 = input('enter the second value of a fibonacci sequence: ');
+
+[a,b] = ihpFibRatio(val1,val2);
+
+fprintf('values whose ratio is approximately the golden ratio: %d, %d\n', a,b);
 
 %problem 4
 disp('');
@@ -108,6 +116,7 @@ figure
 plot(count,balance_ledger);
 xlabel('months');
 ylabel('balance');
+cummulative_savings = balance_ledger(1,end)
 % Find the amount in the savings account each month for the next 18 years (create a vector of the
 % values). A for loop is fine here. Plot the amount in the account as a function of elapsed time in
 % months.
@@ -134,7 +143,7 @@ fprintf('total cost of college over 4 years: %d\n', cummulative_cost);
 
 disp('');
 disp('==================Problem 6================');
-
+fprintf('Total savings - cummulative cost of college = %d\n', cummulative_savings - cummulative_cost);
 disp('');
 disp('==================Problem 7================');
 figure
@@ -147,6 +156,10 @@ grid on
 %click on the max Y values for height
 %and max x values for time elapse
 %
+
+disp('please click the approximate height of the trajectory and the');
+disp('landing (x=0) and press enter');
+
 [X,Y] = ginput;
 
 %find Y values where Y <= 0 (landing point)
