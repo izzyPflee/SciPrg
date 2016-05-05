@@ -52,19 +52,37 @@ zlabel('z');
 
 %problem 2
 disp('');
-disp('================Problem 2 ==============');
+disp('==================Problem 2================');
+load lake_powell.dat;
+%sum each column
+year_sums = sum(lake_powell(:,:));
 
-load lake_powell.dat
+year_averages = (year_sums / 12)
 
-%sum each year and put into a column vector
-[num_months,num_years] = size(lake_powell)
-year_sums = lake_powell'*ones(num_months,1)
-year_avgs = year_sums / num_months
-total_sum = year_sums' * ones(num_years,1)
-total_avg = total_sum / num_years
+%for total average sum all years and divide by total number of months
+total_average = sum(year_sums)/(12*8)
+
+%part b
+higher_than_average_months = find(year_averages>=total_average);
+
+total_higher_months = max(higher_than_average_months);
+
+fprintf('Number of months higher than total average: %d\n', total_higher_months);
+
+years = 2000:2007;
+%parse years and averages using index
+years_above_average = years(higher_than_average_months)';
+averages_above_average = year_averages(higher_than_average_months)';
+%part c
+table(years_above_average, averages_above_average)
+
+%problem 2
+disp('');
+disp('==================Problem 3================');
 
 %problem 4
-
+disp('');
+disp('================Problem 4 ==============');
 base = 2000;
 mo_contrib = 175;
 mo_interest = 0.0041;
@@ -93,6 +111,53 @@ ylabel('balance');
 % Find the amount in the savings account each month for the next 18 years (create a vector of the
 % values). A for loop is fine here. Plot the amount in the account as a function of elapsed time in
 % months.
+
+disp('');
+disp('==================Problem 5================');
+PercentIncrease  =  [10, 0, 10, 0, 10, 5, 5, 0, 5, 5, 0, 10, 0, 5, 10, 5, 0, 10, 0, 0, 5, 5] ;
+%adjust percentage increase vector to represent decimal val
+PercentIncrease = PercentIncrease *.01;
+tuition_cost = 7200;
+cummulative_cost = 0;
+for i = 1:length(PercentIncrease)
+   
+    tuition_cost = tuition_cost*PercentIncrease(i) + tuition_cost;
+    %total cost while student is in college
+    %sum of last 4 years of tuition_cost
+
+    if i > 18
+       cummulative_cost = cummulative_cost + tuition_cost;   
+    end
+end
+
+fprintf('total cost of college over 4 years: %d\n', cummulative_cost);
+
+disp('');
+disp('==================Problem 6================');
+
+disp('');
+disp('==================Problem 7================');
+figure
+%calculate vals as a function of t
+t = 0:30;
+vals = (-9.8/2)*(t.^2)+125*t+500;
+%plot the trajectory values
+plot(vals)
+grid on
+%click on the max Y values for height
+%and max x values for time elapse
+%
+[X,Y] = ginput;
+
+%find Y values where Y <= 0 (landing point)
+est_land_time_index = find(Y <=0);
+%return time where rocket has landed
+est_land_time = X(est_land_time_index);
+%max function for finding max height(Y value)
+est_max_height = max(Y);
+
+fprintf('estimated max height of rocket: %d\n', est_max_height);
+fprintf('estimated landing time of rocket: %d\n', est_land_time);
 
 %end of file
 diary off
