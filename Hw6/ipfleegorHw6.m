@@ -21,36 +21,38 @@ disp('=============== Problem 1 ===============');
 % 
 % fclose(file_id);
 
-disp('');
-disp('=============== Problem 2 ===============');
+% disp('');
+% disp('=============== Problem 2 ===============');
+% 
+% volume = 1:6; %in m^3 units
+% pressure = [2494, 1247, 831, 623, 499, 416];%in kPa units
+% 
+% figure
+% val1 = interp1(volume, pressure, 3.8);
+% plot(volume, pressure,'x', 3.8, val1, 'o');
+% title('linear1');
+% 
+% figure
+% val2 = interp1(volume, pressure, 3.8, 'spline');
+% plot(volume, pressure,'x', 3.8, val2, 'o');
+% title('spline1');
+% 
+% figure
+% val3 = interp1(pressure,volume, 1000);
+% plot(volume,pressure,'x', val3, 1000, 'o');
+% title('linear2');
+% 
+% figure
+% val4 = interp1(pressure,volume, 1000, 'spline');
+% plot(volume,pressure,'x', val4, 1000, 'o');
+% title('spline2');
+% 
+% disp('');
+% disp('=============== Problem 3 ===============');
 
-volume = 1:6; %in m^3 units
-pressure = [2494, 1247, 831, 623, 499, 416];%in kPa units
-
-figure
-val1 = interp1(volume, pressure, 3.8);
-plot(volume, pressure,'x', 3.8, val1, 'o');
-title('linear1');
-
-figure
-val2 = interp1(volume, pressure, 3.8, 'spline');
-plot(volume, pressure,'x', 3.8, val2, 'o');
-title('spline1');
-
-figure
-val3 = interp1(pressure,volume, 1000);
-plot(volume,pressure,'x', val3, 1000, 'o');
-title('linear2');
-
-figure
-val4 = interp1(pressure,volume, 1000, 'spline');
-plot(volume,pressure,'x', val4, 1000, 'o');
-title('spline2');
 
 
 
-
-return
 disp('');
 disp('=============== Problem 4 ===============');
 
@@ -76,6 +78,7 @@ disp('=============== Problem 4 ===============');
 % 
 % set(h,'linewidth',2);
 % 
+
 load hwdata.mat
 
 %formula taken from matlab forum
@@ -83,13 +86,29 @@ load hwdata.mat
 % mu=A1*sigma^2; 
 % A=exp(A0+mu^2/(2*sigma^2));
 
+%Part A
 
+coef = polyfit(x,log(y),2);
 
-%Part-B
+A0 = coef(3);
+A1 = coef(2);
+A2 = coef(1);
 
-%show original data
-plot(x,y2,'o');
-hold on
+% sigma = sqrt(A2/2);
+% mu = sigma.^2 * A1;
+% A = exp(A0+mu.^2/(2*sigma.^2));
+
+sigma=sqrt(-1/(2*A2)); 
+mu=A1*sigma^2; 
+A=exp(A0+mu^2/(2*sigma^2));
+
+newx = -4:0.1:4;
+newy = A*(exp(-1*((newx-mu).^2)/(2*sigma.^2)));
+
+figure
+h = plot(x,y,'o', newx, newy, '-');
+return
+%Part B
 
 %pre-condition the y2 data
 x2 = x(12:33);
