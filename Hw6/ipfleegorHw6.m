@@ -23,35 +23,50 @@ disp('=============== Problem 1 ===============');
 
 disp('');
 disp('=============== Problem 2 ===============');
-
-volume = 1:6; %in m^3 units
-pressure = [2494, 1247, 831, 623, 499, 416];%in kPa units
-
-figure
-val1 = interp1(volume, pressure, 3.8);
-plot(volume, pressure,'x', 3.8, val1, 'o');
-title('linear1');
-
-figure
-val2 = interp1(volume, pressure, 3.8, 'spline');
-plot(volume, pressure,'x', 3.8, val2, 'o');
-title('spline1');
-
-figure
-val3 = interp1(pressure,volume, 1000);
-plot(volume,pressure,'x', val3, 1000, 'o');
-title('linear2');
-
-figure
-val4 = interp1(pressure,volume, 1000, 'spline');
-plot(volume,pressure,'x', val4, 1000, 'o');
-title('spline2');
+% 
+% volume = 1:6; %in m^3 units
+% pressure = [2494, 1247, 831, 623, 499, 416];%in kPa units
+% 
+% figure
+% val1 = interp1(volume, pressure, 3.8);
+% plot(volume, pressure,'x', 3.8, val1, 'o');
+% title('linear1');
+% 
+% figure
+% val2 = interp1(volume, pressure, 3.8, 'spline');
+% plot(volume, pressure,'x', 3.8, val2, 'o');
+% title('spline1');
+% 
+% figure
+% val3 = interp1(pressure,volume, 1000);
+% plot(volume,pressure,'x', val3, 1000, 'o');
+% title('linear2');
+% 
+% figure
+% val4 = interp1(pressure,volume, 1000, 'spline');
+% plot(volume,pressure,'x', val4, 1000, 'o');
+% title('spline2');
 
 disp('');
 disp('=============== Problem 3 ===============');
 
+%re-use the volume and pressure vectors from the previous problem
+volume = 1:6; %in m^3 units
+pressure = [2494, 1247, 831, 623, 499, 416];%in kPa units
 
+volume_inv = volume.^-1;
 
+coef = polyfit(volume_inv, pressure,1);
+
+temp = (pressure .* volume)/ 8.314;
+temp = mean(temp)
+
+figure
+plot(volume_inv, pressure);
+xlabel('1/V');
+ylabel('Pressure');
+
+return
 
 disp('');
 disp('=============== Problem 4 ===============');
