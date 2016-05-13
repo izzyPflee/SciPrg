@@ -17,17 +17,18 @@ file_id = fopen('molecule.txt', 'r');
 % 
 [Symbols, X, Y] = Ihp_parse_molecule(file_id);
 figure
+title('Atomic Symbol Plot');
 hold on
 for i = 1:length(Symbols)
     tmp_symbol = Symbols(:,i);
    if strcmp(strcat(tmp_symbol'), 'C') == 1
-       disp('C');
+       plot(X(i),Y(i),'d');
    end
    if strcmp(strcat(tmp_symbol'), 'He') == 1
-       disp('He');
+       plot(X(i),Y(i),'*');
    end
    if strcmp(strcat(tmp_symbol'), 'H') == 1
-       disp('H');
+       plot(X(i),Y(i),'s');
    end
 end
 
