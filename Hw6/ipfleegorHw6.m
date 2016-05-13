@@ -15,22 +15,22 @@ disp('=============== Problem 1 ===============');
 % 
 file_id = fopen('molecule.txt', 'r');
 % 
-%call a function
-%TODO:create function
-temp = fgetl(file_id);
-begin_str = '@ATOM';
-while(strcmp(temp, begin_str) ~= 1)
-    temp = fgetl(file_id);
+[Symbols, X, Y] = Ihp_parse_molecule(file_id);
+figure
+hold on
+for i = 1:length(Symbols)
+    tmp_symbol = Symbols(:,i);
+   if strcmp(strcat(tmp_symbol'), 'C') == 1
+       disp('C');
+   end
+   if strcmp(strcat(tmp_symbol'), 'He') == 1
+       disp('He');
+   end
+   if strcmp(strcat(tmp_symbol'), 'H') == 1
+       disp('H');
+   end
 end
-formatSpec = '%*d %2c %f %f %*f'; 
-sizeA = [2 inf];
-A = fscanf(file_id, formatSpec, sizeA);
-%return values
-Symbols = char(A(:,1:2:end));
-X = A(1,2:2:end);
-Y = A(2,2:2:end);
 
- 
  fclose(file_id);
 return
 disp('');
