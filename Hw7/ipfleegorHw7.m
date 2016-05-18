@@ -2,48 +2,44 @@
 % init workspace
 clc, clear, close all;
 
-% disp('');
-% disp('=========== Problem 1 ==========');
-% 
-% 
-% %create step wave form
-% 
-% step_t = [ones(1,4),zeros(1,4)];
-% 
-% %part A
-% % Use the dfs() function on the course website to look at the trigonometric (Fourier)
-% % interpolation for the value of m that the theory says should give you an exact interpolation.
-% % Tell it to plot the sinusoidal (Fourier) interpolation with a stepsize of 1 (you’ll then be
-% % looking at a strictly linear interpolation provided by the plot function).
-% figure
-% dfs(step_t,4,1,1);
-% title('1A: m=4,n=8');
-% 
-% % part B
-% % Do it again, but tell it to plot with the default stepsize (which is 10 points per original
-% % sample). This will reveal the shape of the summed sinusoids between samples. This time let
-% % it print the coefficients, as you’ll need to compare them to the coefficients produced by the
-% % equivalent Fourier analysis produced by the fft() function below
-% figure
-% dfs(step_t,4,1,0);
-% title('1B: m=4,n=8, interpolated');
-% 
-% %part C
-% % Now look at the interpolation for m one less than that used in part a. The results may
-% % surprise you. Provide a short explanation (in a disp or fprintf) as to why this looks the same
-% % as part a, even though we’re using fewer basis functions for the fit. Or are we?
-% figure
-% dfs(step_t,3,1,0);
-% title('1C: m=3,n=8, interpolated');
-% 
-% %Part D
-% % Now look at the interpolation for m two less than that used in part a. Provide a short
-% % explanation for why the fit does not pass through the sample points.
-% figure
-% dfs(step_t,2,1,0);
-% title('1C: m=2,n=8, interpolated');
+disp('');
+disp('=========== Problem 1 ==========');
 
-% disp('');
+
+%create step wave form
+
+step_t = [ones(1,4),zeros(1,4)];
+
+%Part A
+
+subplot(2,2,1);
+dfs(step_t,4,1,1);
+title('1A: m=4,n=8');
+
+%Part B
+
+subplot(2,2,2);
+dfs(step_t,4,1,0);
+title('1B: m=4,n=8, interpolated');
+
+%Part C
+
+subplot(2,2,3);
+dfs(step_t,3,1,0);
+title('1C: m=3,n=8, interpolated');
+
+%Part D
+
+subplot(2,2,4);
+dfs(step_t,2,1,0);
+title('1D: m=2,n=8, interpolated');
+
+%Part E
+
+
+return
+
+disp('');
 disp('=========== Problem 2 ==========');
 
 %Part A
@@ -99,8 +95,6 @@ time_domain = -fs/2:1/(length(X_2)/2):fs/2-1/(length(X_2)/2);
 subplot(3,2,6);
 plot(time_domain, abs(X_2),'-');
 
-
-return
 
 disp('');
 disp('=========== Problem 3 ==========');
