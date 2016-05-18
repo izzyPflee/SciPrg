@@ -89,7 +89,7 @@ disp('');
 disp('=========== Problem 3 ==========');
 
 pulse_wave = [zeros(1,9),ones(1,1),zeros(1,9)];
-figure
+subplot(2,1,1);
 dfs(pulse_wave,0,1,0);
 
 X = fft(pulse_wave);
@@ -98,8 +98,8 @@ X_1 = fftshift(X);
 
 fs = 1;
 time_domain = -fs/2:1/length(X):fs/2-1/length(X);
-figure
-plot(time_domain,abs(X_1),'-');
+subplot(2,1,2);
+sp2 = plot(time_domain,abs(X_1),'-');
 
 return
 disp('');
