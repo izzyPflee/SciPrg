@@ -44,46 +44,63 @@ clc, clear, close all;
 % title('1C: m=2,n=8, interpolated');
 
 % disp('');
-% disp('=========== Problem 2 ==========');
-% 
-% %Part A
-% pulse_wave = [zeros(1,5),ones(1,4),zeros(1,5)];
-% 
-% %plot in 1,1
-% % [a0,a,b] = dfs(pulse_wave,0,1,0);
-% 
-% X = fft(pulse_wave);
-% X_1 = fftshift(X);
-% 
-% 
-% fs = 1;
-% time_domain = -fs/2:1/length(X):fs/2-1/length(X);
-% 
-% plot(time_domain,abs(X_1),'-o');
-% 
-% % Part B
-% 
-% pulse_wave_2 = [zeros(1,10),ones(1,8),zeros(1,10)];
-% X = fft(pulse_wave_2);
-% X_2 = fftshift(X);
-% 
-% fs = 2;
-% time_domain = -fs/2:1/length(pulse_wave):fs/2-1/length(pulse_wave);
-% 
-% plot(time_domain, abs(X_2),'-o');
-% 
-% % [a0,a,b] = dfs(pulse_wave_2,0,1,0);
-% 
-% %Part C
-% 
-% pulse_wave = [zeros(1,5),ones(1,4),zeros(1,5)];
-% X = fft(pulse_wave, 256);
-% X_2 = fftshift(X);
-% fs = 1;
-% time_domain = -fs/2:1/length(X_2):fs/2-1/length(X_2);
-% 
-% plot(time_domain,abs(X_2),'-o');
-% return
+disp('=========== Problem 2 ==========');
+
+%Part A
+pulse_wave = [zeros(1,5),ones(1,4),zeros(1,5)];
+
+subplot(3,2,1);
+dfs(pulse_wave,0,1,0);
+
+X = fft(pulse_wave);
+X_1 = fftshift(X);
+
+
+fs = 1;
+time_domain = -fs/2:1/length(X):fs/2-1/length(X);
+subplot(3,2,3);
+plot(time_domain,abs(X_1),'-o');
+
+% Part B
+
+pulse_wave_2 = [zeros(1,10),ones(1,8),zeros(1,10)];
+subplot(3,2,2);
+dfs(pulse_wave_2,0,1,0);
+
+X = fft(pulse_wave_2);
+X_2 = fftshift(X);
+
+fs = 2;
+time_domain = -fs/2:1/length(pulse_wave):fs/2-1/length(pulse_wave);
+subplot(3,2,4);
+plot(time_domain, abs(X_2),'-o');
+
+% [a0,a,b] = dfs(pulse_wave_2,0,1,0);
+
+%Part C
+
+pulse_wave = [zeros(1,5),ones(1,4),zeros(1,5)];
+X = fft(pulse_wave, 256);
+X_2 = fftshift(X);
+fs = 1;
+time_domain = -fs/2:1/length(X_2):fs/2-1/length(X_2);
+
+subplot(3,2,5);
+plot(time_domain,abs(X_2),'-');
+
+%pad the singal with twice the samples
+
+pulse_wave_2 = [zeros(1,10),ones(1,8),zeros(1,10)];
+X = fft(pulse_wave_2,256);
+X_2 = fftshift(X);
+
+fs = 2;
+time_domain = -fs/2:1/(length(X_2)/2):fs/2-1/(length(X_2)/2);
+subplot(3,2,6);
+plot(time_domain, abs(X_2),'-');
+
+
+return
 
 disp('');
 disp('=========== Problem 3 ==========');
@@ -101,7 +118,6 @@ time_domain = -fs/2:1/length(X):fs/2-1/length(X);
 subplot(2,1,2);
 sp2 = plot(time_domain,abs(X_1),'-');
 
-return
 disp('');
 disp('=========== Problem 4 ==========');
 
