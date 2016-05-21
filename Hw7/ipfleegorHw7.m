@@ -34,16 +34,19 @@ disp('');
 %Part D
 
 subplot(2,2,4);
-dfs(step_t,2,1,0);
+[a0,a,b]= dfs(step_t,2,1,0)
 title('1D: m=2,n=8, interpolated');
 disp(' ');
-disp('Part D: We can see by looking at the coeffcients of the basis functions');
+disp('Part D: We can see by looking at the coefficients of the basis functions');
 disp('that the second sin and cos basis functions are also 0, so the fit is ');
-disp('made by 2 basis functions which are insufficient through the points.');
+disp('made by 2 basis functions which are insufficient to fit through the points.');
 disp(' ');
 
 %Part E
 disp('Part E: ');
+disp('There is a difference in scale factor between the coefficients');
+disp('We can get to the coefficients from the fft to the dfs by multiplying the');
+disp('values by the appropriate scalar');
 
 [a0,a,b]= dfs(step_t,4,0,0)
 X = fft(step_t)'
@@ -71,7 +74,7 @@ title('spectrum n = 14');
 
 pulse_wave_2 = [zeros(1,10),ones(1,8),zeros(1,10)];
 subplot(3,2,2);
-dfs(pulse_wave_2,0,1,0)
+dfs(pulse_wave_2,0,1,0);
 title('time series n = 28');
 X = fft(pulse_wave_2);
 X_2 = fftshift(X);
