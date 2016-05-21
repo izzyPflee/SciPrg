@@ -1,6 +1,13 @@
+% Isaac Pfleegor
+% CSCD 409, Homework 7
+% <05/19/2016>
+%
+clc, clear, close all ;
 
-% init workspace
-clc, clear, close all;
+disp('Isaac Pfleegor - CSCD 409 Homework 7');
+disp('This assignment was tested in Matlab');
+
+diary ipfleegorHw7.txt
 
 disp('');
 disp('=========== Problem 1 ==========');
@@ -169,3 +176,5 @@ soundsc(dec_sig)
 choice = menu('Choose a demodulating sin frequency',...
     '10Khz','20Khz','30Khz','40Khz','50Khz','Quit');
 end
+
+diary off
