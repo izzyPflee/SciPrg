@@ -10,13 +10,8 @@ x_next = 2;
 while(abs(x_next - x_prev) > tol)
    
     x_prev = x_next;
-    x_next = 0.5*(x_prev + n/x_prev)
+    x_next = 0.5*(x_prev + n/x_prev);
 end
-
-% for i = 1:10
-%     x_prev = x_next;
-%     x_next = 0.5*(x_prev + n/x_prev);
-% end
 
 root = x_next;
 end
