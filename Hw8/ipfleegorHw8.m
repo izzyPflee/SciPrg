@@ -54,13 +54,11 @@ r2 .^ 2
 % ask why result doesn't always produce 8
 r3 .^ 2 
 disp('');
+disp('========== Problem 4 ==========');
+
+disp('');
 disp('========== Problem 5 ==========');
 
-%this is the function that we want to minimize
-%want to pass in parameters a & b that minimize this:
-%we will initially will pass in a guess for a & b.
-% we can use the function that we have from HW4
-%Mapprox = a|R| + b|I|
 
 [x,fval] = fminsearch('IhpProb5Cost',[0.5, 0.5])
 
@@ -73,16 +71,13 @@ p2 = [1.8,0];
 p3 = [1.5,1];
 p4 = [0.3,1.6];
 
+%guess points for p5 and p6
 p5 = [1,1];
 p6 = [2,2];
+%want to pass p5 and p6 as a single parameter
+points = [p5, p6];
 
-b = p6;
-
-[x1,fval1] = fminsearch(@(a)IhpProb6Cost(a,b),p5)
-
-b = p5;
-
-[x2,fval2] = fminsearch(@(a)IhpProb6Cost(a,b),p6)
+[x, fval] = fminsearch('IhpProb6Cost', points)
 
 
 

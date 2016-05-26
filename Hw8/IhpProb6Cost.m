@@ -1,4 +1,4 @@
-function cost = IhpProb6Cost(p5,p6)
+function cost = IhpProb6Cost(vec)
 %return sum of distances between specified
 %points
 
@@ -6,6 +6,8 @@ p1 = [0,0];
 p2 = [1.8,0];
 p3 = [1.5,1];
 p4 = [0.3,1.6]; 
+p5 = [vec(1), vec(2)];
+p6 = [vec(3), vec(4)];
 
 cost = 0;
 %these distances shouldn't change
