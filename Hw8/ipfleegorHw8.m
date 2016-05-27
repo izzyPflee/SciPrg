@@ -56,11 +56,21 @@ r3 .^ 2
 disp('');
 disp('========== Problem 4 ==========');
 
+disp('if we take the error bound condition: (|b - a|) / 2^k < tol');
+disp('and solve for k then k will give us the max number of iterations');
+disp('required for convergence. We can observe when we solve for k using the equation');
+disp('specified in the bisect.m file that we can find the iterations required for a given tolerance');
+disp('so no more iterations than that are needed.');
+
 disp('');
 disp('========== Problem 5 ==========');
 
 
-[x,fval] = fminsearch('IhpProb5Cost',[0.5, 0.5])
+[x,fval] = fminsearch('IhpProb5Cost',[0.5, 0.5]);
+
+x1 = x(1)
+y1 = x(2)
+RMS_error = fval
 
 
 disp('');
@@ -77,8 +87,14 @@ p6 = [2,2];
 %want to pass p5 and p6 as a single parameter
 points = [p5, p6];
 
-[x, fval] = fminsearch('IhpProb6Cost', points)
+[x, fval] = fminsearch('IhpProb6Cost', points);
 
+x1 = x(1)
+y1 = x(2)
+x2 = x(3)
+y2 = x(4)
+
+min_total_dist = fval
 
 
 
