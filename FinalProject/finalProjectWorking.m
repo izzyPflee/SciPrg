@@ -61,6 +61,7 @@ k = K(y);
 
 %Estimate the gradient vector from the changes in K
 %divided by the change in w (which is h)
+
 %todo: make this generalized for multiple dimensions
 k_w1 = (K((w + [h;0;0;0])'*z) - k)/h;
 k_w2 = (K((w + [0;h;0;0])'*z) - k)/h;
@@ -86,5 +87,8 @@ end
 %use the uncorrelated data(z)
 z = z - w*w'*z;
 
+%y is the unmixed signal(we want to keep these in a matrix)
+
+%repeat unmixing process for all other dimensions of z
  
 
