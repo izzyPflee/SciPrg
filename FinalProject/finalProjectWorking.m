@@ -40,10 +40,16 @@ eta = 2e-2;
 %tolerance limit before stopping
 tol = 1e-4;
 
+k_prev = eps;
+
 maxiter = 100;
 
 K = @(x)mean(x.^4);
-% for i = 1:maxiter
+%Stop when the increase in K falls below
+%some relative change: abs((Knew ? K) / K) < tol
+% or max iter is met
+i = 1;
+while i <= maxiter && abs((k - k_prev)/k) < tol 
 %project the data onto the unmixing vector
 %for one dimension
 y = w'*z;
@@ -62,8 +68,8 @@ k_w4 = (K((w + [0;0;0;h])'*z) - k)/h;
 g = [k_w1;k_w2;k_w3;k_w4];
 %take a step in the direction of g
 w = w + eta*g;
+    
+k_prev = k;
+i= i + 1;
 
-
-% Either compute or estimate the direction of the gradient
-% in K with respect to w (delta K/delta w).
-% end
+ end
