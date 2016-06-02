@@ -32,14 +32,28 @@ n = norm(r);
 %set w to unit-norm vector
 w = r / n;
 
+%step size for kurtosis
+%values has been taken from online example
+h = 1e-4;
+%step size for gradient ascent
+eta = 2e-2;
+%tolerance limit before stopping
+tol = 1e-4;
+
+maxiter = 100;
+
+K = @(x)mean(x.^4);
+% for i = 1:maxiter
 %project the data onto the unmixing vector
 %for one dimension
 y = w'*z;
 
-%Measure the numerator of the kurtosis in y
-%current kurtosis numerator
-
+%estimate kurtosis numerator
 k = mean(y.^4);
+
+k1_w1 = K((w + [h;0;0;0])'*z);
+g = 
 
 % Either compute or estimate the direction of the gradient
 % in K with respect to w (delta K/delta w).
+% end
