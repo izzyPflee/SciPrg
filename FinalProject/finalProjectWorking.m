@@ -50,9 +50,19 @@ y = w'*z;
 
 %estimate kurtosis numerator
 k = mean(y.^4);
+k = K(y);
 
-k1_w1 = K((w + [h;0;0;0])'*z);
-g = 
+%Estimate the gradient vector from the changes in K
+%divided by the change in w (which is h)
+k_w1 = (K((w + [h;0;0;0])'*z) - k)/h;
+k_w2 = (K((w + [0;h;0;0])'*z) - k)/h;
+k_w3 = (K((w + [0;0;h;0])'*z) - k)/h;
+k_w4 = (K((w + [0;0;0;h])'*z) - k)/h;
+%put changes in K in a gradient vector(g)
+g = [k_w1;k_w2;k_w3;k_w4];
+%take a step in the direction of g
+w = w + eta*g;
+
 
 % Either compute or estimate the direction of the gradient
 % in K with respect to w (delta K/delta w).
