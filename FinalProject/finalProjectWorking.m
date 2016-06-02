@@ -6,6 +6,8 @@ clc, clear, close all;
 %load variables from file
 load mix2016.mat
 
+[m,n] = size(x);
+
 %pre-process data with PCA using SVD
 
 %principal components are in U
@@ -13,11 +15,10 @@ load mix2016.mat
 %project data
 z = U'*x;
 
-%zero-mean the data
-z = z - mean(z(:));
-
 %scale z to unit variance
-z=z/std(z(:));
+for i=1:m
+   z(i,:)=z(i,:)/std(z(i,:)) ;
+end
 
 
 %generate a m-dimensional random unmixing vector(w)
@@ -30,36 +31,37 @@ z=z/std(z(:));
 r = 0 + (2*pi - 0).*rand(4,1);
 n = norm(r);
 %set w to unit-norm vector
-w = r / n;
+w = r / n
 
 %step size for kurtosis
 %values has been taken from online example
-h = 1e-4;
+h = 1e-5;
 %step size for gradient ascent
 eta = 2e-2;
 %tolerance limit before stopping
-tol = 1e-4;
+tol = 1e-5;
 
-k_prev = eps;
-
-maxiter = 100;
+k_prev = inf;
+k = eps;
+maxiter = 400;
 
 K = @(x)mean(x.^4);
 %Stop when the increase in K falls below
 %some relative change: abs((Knew ? K) / K) < tol
 % or max iter is met
 i = 1;
-while i <= maxiter && abs((k - k_prev)/k) < tol 
+while i <= maxiter && abs((k - k_prev)/k) > tol 
 %project the data onto the unmixing vector
 %for one dimension
 y = w'*z;
-
+k_prev = k;
 %estimate kurtosis numerator
-k = mean(y.^4);
+% k = mean(y.^4);
 k = K(y);
 
 %Estimate the gradient vector from the changes in K
 %divided by the change in w (which is h)
+%todo: make this generalized for multiple dimensions
 k_w1 = (K((w + [h;0;0;0])'*z) - k)/h;
 k_w2 = (K((w + [0;h;0;0])'*z) - k)/h;
 k_w3 = (K((w + [0;0;h;0])'*z) - k)/h;
@@ -68,8 +70,21 @@ k_w4 = (K((w + [0;0;0;h])'*z) - k)/h;
 g = [k_w1;k_w2;k_w3;k_w4];
 %take a step in the direction of g
 w = w + eta*g;
-    
-k_prev = k;
-i= i + 1;
+%set w to unit norm
+w = w/norm(w);
 
- end
+i = i + 1;
+end
+
+%Record the final w as the basis vector for the current dimension
+
+% Remove the data projections onto that final w from the dataset,
+%leaving the residuals to work on for the next axis 
+%(which needn't be orthogonal in the original space)
+
+%Xnew = X ? wy = X ? ww'X
+%use the uncorrelated data(z)
+z = z - w*w'*z;
+
+ 
+
