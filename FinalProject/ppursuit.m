@@ -69,6 +69,7 @@ k = K(y);
 %Estimate the gradient vector from the changes in K
 %divided by the change in w (which is h)
 
+%put changes in K in a gradient vector(g)
 g = zeros(m,1);
 
 for i = 1:m
@@ -78,13 +79,6 @@ for i = 1:m
     
 end
 
-%todo: make this generalized for multiple dimensions
-% k_w1 = (K((w + [h;0;0;0])'*x) - k)/h;
-% k_w2 = (K((w + [0;h;0;0])'*x) - k)/h;
-% k_w3 = (K((w + [0;0;h;0])'*x) - k)/h;
-% k_w4 = (K((w + [0;0;0;h])'*x) - k)/h;
-%put changes in K in a gradient vector(g)
-% g = [k_w1;k_w2;k_w3;k_w4];
 %take a step in the direction of g
 w = w + eta*g;
 %set w to unit norm
