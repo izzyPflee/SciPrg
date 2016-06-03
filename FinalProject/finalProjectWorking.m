@@ -14,10 +14,10 @@ load mix2016.mat
 [U,S,V] = svd(x,0);
 %project data
 z = U'*x;
-
+sounds = zeros(m,n);
 %scale z to unit variance
 for i=1:m
-   z(i,:)=z(i,:)/std(z(i,:)) ;
+   z(i,:)=z(i,:)/std(z(i,:));
 end
 
 
@@ -42,7 +42,18 @@ eta = 2e-2;
 tol = 1e-5;
 max_iter = 400;
 %call ppursuit function
-[y,K] = ppursuit(h,eta,tol,max_iter,z);
+
+%todo ask how we can keep a copy of w, if we dont
+%return it from the function
+for i = 1:4
+    [y,K, w] = ppursuit(h,eta,tol,max_iter,z);  
+%     z = z - w*w'*z;
+    z = z - w*y;
+    soundsc(y);
+    pause(3);
+   
+end
+% [y,K] = ppursuit(h,eta,tol,max_iter,z);
 
 
 

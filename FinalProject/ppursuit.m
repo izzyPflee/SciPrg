@@ -1,4 +1,4 @@
-function [y, K] = ppursuit(h, eta, tol, mxi, x)
+function [y, K, w] = ppursuit(h, eta, tol, mxi, x)
 % This function uses projection pursuit to demix m
 % signal mixtures into m estimated source signals.
 % h Step size for probing the Kurtosis (K) of the
@@ -46,7 +46,7 @@ w = r / n;
 k_prev = inf;
 k = eps;
 % maxiter = 400;
-maxiter = mxi
+maxiter = mxi;
 
 K = @(x)mean(x.^4);
 %Stop when the increase in K falls below
