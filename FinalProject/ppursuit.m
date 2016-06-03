@@ -53,6 +53,10 @@ K = @(x)mean(x.^4);
 %some relative change: abs((Knew - K) / K) > tol
 % or max iter is met
 i = 1;
+
+%use m for gradient vector
+[m,n] = size(x);
+
 while i <= maxiter && abs((k - k_prev)/k) > tol 
 %project the data onto the unmixing vector
 %for one dimension
@@ -65,13 +69,22 @@ k = K(y);
 %Estimate the gradient vector from the changes in K
 %divided by the change in w (which is h)
 
+g = zeros(m,1);
+
+for i = 1:m
+   h_vec = zeros(m,1);
+   h_vec(i,1) = h;
+   g(i,1) = (K((w + h_vec)'*x) - k)/h;
+    
+end
+
 %todo: make this generalized for multiple dimensions
-k_w1 = (K((w + [h;0;0;0])'*x) - k)/h;
-k_w2 = (K((w + [0;h;0;0])'*x) - k)/h;
-k_w3 = (K((w + [0;0;h;0])'*x) - k)/h;
-k_w4 = (K((w + [0;0;0;h])'*x) - k)/h;
+% k_w1 = (K((w + [h;0;0;0])'*x) - k)/h;
+% k_w2 = (K((w + [0;h;0;0])'*x) - k)/h;
+% k_w3 = (K((w + [0;0;h;0])'*x) - k)/h;
+% k_w4 = (K((w + [0;0;0;h])'*x) - k)/h;
 %put changes in K in a gradient vector(g)
-g = [k_w1;k_w2;k_w3;k_w4];
+% g = [k_w1;k_w2;k_w3;k_w4];
 %take a step in the direction of g
 w = w + eta*g;
 %set w to unit norm

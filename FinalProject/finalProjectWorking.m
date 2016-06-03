@@ -37,7 +37,7 @@ w = r / n;
 %values has been taken from online example
 h = 1e-5;
 %step size for gradient ascent
-eta = 2e-2;
+eta = 2e-1;
 %tolerance limit before stopping
 tol = 1e-5;
 max_iter = 400;
