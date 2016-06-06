@@ -14,10 +14,10 @@ load mix2016.mat
 [U,S,V] = svd(x,0);
 %project data
 z = U'*x;
-
+sounds = zeros(m,n);
 %scale z to unit variance
 for i=1:m
-   z(i,:)=z(i,:)/std(z(i,:)) ;
+   z(i,:)=z(i,:)/std(z(i,:));
 end
 
 
@@ -31,51 +31,31 @@ end
 r = 0 + (2*pi - 0).*rand(4,1);
 n = norm(r);
 %set w to unit-norm vector
-w = r / n
+w = r / n;
 
 %step size for kurtosis
 %values has been taken from online example
 h = 1e-5;
 %step size for gradient ascent
-eta = 2e-2;
+eta = 2e-1;
 %tolerance limit before stopping
 tol = 1e-5;
+max_iter = 400;
+%call ppursuit function
 
-k_prev = inf;
-k = eps;
-maxiter = 400;
-
-K = @(x)mean(x.^4);
-%Stop when the increase in K falls below
-%some relative change: abs((Knew ? K) / K) < tol
-% or max iter is met
-i = 1;
-while i <= maxiter && abs((k - k_prev)/k) > tol 
-%project the data onto the unmixing vector
-%for one dimension
-y = w'*z;
-k_prev = k;
-%estimate kurtosis numerator
-% k = mean(y.^4);
-k = K(y);
-
-%Estimate the gradient vector from the changes in K
-%divided by the change in w (which is h)
-
-%todo: make this generalized for multiple dimensions
-k_w1 = (K((w + [h;0;0;0])'*z) - k)/h;
-k_w2 = (K((w + [0;h;0;0])'*z) - k)/h;
-k_w3 = (K((w + [0;0;h;0])'*z) - k)/h;
-k_w4 = (K((w + [0;0;0;h])'*z) - k)/h;
-%put changes in K in a gradient vector(g)
-g = [k_w1;k_w2;k_w3;k_w4];
-%take a step in the direction of g
-w = w + eta*g;
-%set w to unit norm
-w = w/norm(w);
-
-i = i + 1;
+%todo ask how we can keep a copy of w, if we dont
+%return it from the function
+for i = 1:4
+    [y,K, w] = ppursuit(h,eta,tol,max_iter,z);  
+%     z = z - w*w'*z;
+    z = z - w*y;
+    soundsc(y);
+    pause(3);
+   
 end
+% [y,K] = ppursuit(h,eta,tol,max_iter,z);
+
+
 
 %Record the final w as the basis vector for the current dimension
 
