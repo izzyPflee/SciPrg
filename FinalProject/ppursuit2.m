@@ -17,7 +17,7 @@ end
 %duplicate matrix to insert sound vectors for return value
 sounds = z;
 
-for mixture = 1:4
+for mixture_num = 1:m
     
     %%ppursuit
     %generate 4 random values in range 0 to 2pi
@@ -74,7 +74,7 @@ for mixture = 1:4
     %end ppursuit
     z = z - w*y;
     %play sounds for testing
-    sounds(mixture,:) = y;
+    sounds(mixture_num,:) = y;
 %     soundsc(y);
 %     pause(3);
     
