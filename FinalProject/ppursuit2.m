@@ -14,16 +14,6 @@ for i=1:m
     z(i,:)=z(i,:)/std(z(i,:));
 end
 
-% %step size for kurtosis
-% %values has been taken from online example
-% h = 1e-5;
-% %step size for gradient ascent
-% eta = 2e-1;
-% %tolerance limit before stopping
-% tol = 1e-5;
-% mxi = 400;
-% %call ppursuit function
-% %end temp
 
 
 for mixture = 1:4
@@ -35,13 +25,7 @@ for mixture = 1:4
     %set w to unit-norm vector
     w = r / n;
     
-    %step size for kurtosis
-    %values has been taken from online example
-    % h = 1e-5;
-    %step size for gradient ascent
-    % eta = 2e-2;
-    %tolerance limit before stopping
-    % tol = 1e-5;
+    
     
     k_prev = inf;
     k = eps;
