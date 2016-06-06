@@ -8,13 +8,14 @@ function [y,k] = ppursuit2(h, eta, tol, mxi, x)
 [U,S,V] = svd(x,0);
 %project data
 z = U'*x;
-sounds = zeros(m,n);
+
 %scale z to unit variance
 for i=1:m
     z(i,:)=z(i,:)/std(z(i,:));
 end
 
-
+%duplicate matrix to insert sound vectors for return value
+sounds = z;
 
 for mixture = 1:4
     
@@ -73,10 +74,13 @@ for mixture = 1:4
     %end ppursuit
     z = z - w*y;
     %play sounds for testing
-    soundsc(y);
-    pause(3);
+    sounds(mixture,:) = y;
+%     soundsc(y);
+%     pause(3);
     
 end %end mixture loop
 
+%return unmixed sounds
+y = sounds;
 
 end%end function
