@@ -1,11 +1,5 @@
 
-%init workspace
-clc, clear, close all;
-
-%temp before making a function
-%load variables from file
-load mix2016.mat
-
+function [y,k] = ppursuit2(h, eta, tol, mxi, x)
 [m,n] = size(x);
 
 %pre-process data with PCA using SVD
@@ -17,19 +11,19 @@ z = U'*x;
 sounds = zeros(m,n);
 %scale z to unit variance
 for i=1:m
-   z(i,:)=z(i,:)/std(z(i,:));
+    z(i,:)=z(i,:)/std(z(i,:));
 end
 
-%step size for kurtosis
-%values has been taken from online example
-h = 1e-5;
-%step size for gradient ascent
-eta = 2e-1;
-%tolerance limit before stopping
-tol = 1e-5;
-mxi = 400;
-%call ppursuit function
-%end temp
+% %step size for kurtosis
+% %values has been taken from online example
+% h = 1e-5;
+% %step size for gradient ascent
+% eta = 2e-1;
+% %tolerance limit before stopping
+% tol = 1e-5;
+% mxi = 400;
+% %call ppursuit function
+% %end temp
 
 
 for mixture = 1:4
@@ -94,7 +88,11 @@ for mixture = 1:4
     end
     %end ppursuit
     z = z - w*y;
+    %play sounds for testing
     soundsc(y);
     pause(3);
     
 end %end mixture loop
+
+
+end%end function
