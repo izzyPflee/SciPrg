@@ -16,4 +16,4 @@ tol = 1e-5;
 mxi = 400;
 %call ppursuit function
 
-ppursuit2(h,eta,tol,mxi,x);
+[y,K] = ppursuit2(h,eta,tol,mxi,x);
