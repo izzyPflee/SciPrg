@@ -14,7 +14,7 @@ for i=1:m
     z(i,:)=z(i,:)/std(z(i,:));
 end
 
-%duplicate matrix to insert sound vectors for return value
+%duplicate matrix to insert unmixed signal projection vectors for return value
 sounds = z;
 %matrix for holding Kurtosis history
 k_history = zeros(4, mxi);
@@ -30,7 +30,6 @@ for mixture_num = 1:m
     
     k_prev = inf;
     k = eps;
-    % maxiter = 400;
     maxiter = mxi;
     
     K = @(x)mean(x.^4);
@@ -48,10 +47,9 @@ for mixture_num = 1:m
         y = w'*z;
         k_prev = k;
         %estimate kurtosis numerator
-        % k = mean(y.^4);
+        
         k = K(y);
-%         fprintf('%d %d', mixture_num, );
-        k_history(mixture_num,i) = k_prev;
+        k_history(mixture_num,i) = k;
         %Estimate the gradient vector from the changes in K
         %divided by the change in w (which is h)
         
@@ -75,10 +73,9 @@ for mixture_num = 1:m
     end
     %end ppursuit
     z = z - w*y;
-    %play sounds for testing
+    %add projection to sounds array
     sounds(mixture_num,:) = y;
-%     soundsc(y);
-%     pause(3);
+
     
 end %end mixture loop
 
