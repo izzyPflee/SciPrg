@@ -1,5 +1,28 @@
 
-function [y,K] = ppursuit2(h, eta, tol, mxi, x)
+function [y,K] = ppursuit(h, eta, tol, mxi, x)
+% This function uses projection pursuit to demix m
+% signal mixtures into m estimated source signals.
+% h Step size for probing the Kurtosis (K) of the
+% demixed signals. K is probed by looking at
+% K(w + h) in the m dimensions of w, one at a time.
+% eta Distance that the demixing vector w is adjusted
+% in the direction of the estimated gradient of
+% K. IOW, wnext = w + eta*g where g is the
+% (perhaps estimated) gradient of K.
+% tol Stopping criterion for gradient ascent. The
+% ascent terminates when the relative change in
+% abs(K) is < tol (abs change in K divided by K).
+% mxi Maximum iterations to execute on the ascent
+% of K for each recovered signal.
+% x (m x n) matrix of signal mixtures. Each row
+% is a 1 x n mixture of m source signals. The
+% source signals may be anything, and there is
+% no assumed relationship between the n samples
+% of a given mixture.
+% y The (m x n) source estimates passed out.
+% K The (m x ?) history of the ascent of Kurtosis
+% for each recovered source. Having this history
+% helps the user tune the search parameters.
 [m,n] = size(x);
 
 %pre-process data with PCA using SVD
@@ -17,13 +40,14 @@ end
 %duplicate matrix to insert unmixed signal projection vectors for return value
 sounds = z;
 %matrix for holding Kurtosis history
-k_history = zeros(4, mxi);
+
+k_history = zeros(m, mxi);
 
 for mixture_num = 1:m
     
     %%ppursuit
     %generate 4 random values in range 0 to 2pi
-    r = 0 + (2*pi - 0).*rand(4,1);
+    r = 0 + (2*pi - 0).*rand(m,1);
     n = norm(r);
     %set w to unit-norm vector
     w = r / n;    
